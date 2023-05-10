@@ -1,0 +1,210 @@
+@font-face {
+  font-family: vazir;
+  src: url(./Fonts/Vazir-Regular-FD.ttf);
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 15px 50px;
+  box-shadow: 0 2px 5px 0px rgb(208, 208, 208);
+
+  .enterance {
+    font-family: vazir;
+
+    > :last-child {
+      margin-left: 8px;
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .loged-in-user-options {
+    font-family: vazir;
+
+    > span {
+      font-size: 13.5px;
+    }
+
+    > button {
+      border: none;
+      border-radius: 15px;
+      font-family: vazir;
+      padding: 5px 15px;
+      margin-right: 15px;
+      background-color: #e33838;
+      color: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
+  .logo {
+    width: 60px;
+    height: 45px;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .change-theme {
+    font-size: 20px;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+}
+
+// below is about ad modal
+
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  width: 50%;
+  height: 80%;
+  overflow: auto;
+  direction: rtl;
+  font-family: vazir;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 7px;
+  margin-left: 5px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {
+  padding: 30px 16px;
+
+  form {
+    padding-bottom: 50px;
+    .form-control {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+
+      label {
+        margin-bottom: 12px;
+      }
+
+      input {
+        font-family: vazir;
+        padding: 7px;
+        border-radius: 5px;
+        border: 1px solid gray;
+      }
+
+      textarea {
+        height: 150px;
+        font-family: vazir;
+        padding: 7px;
+      }
+    }
+    button[type="submit"] {
+      float: left;
+      margin-top: 15px;
+      font-family: vazir;
+      cursor: pointer;
+      color: #fff;
+      background-color: green;
+      padding: 7px 30px;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+}
+
+.map-container {
+  border-radius: 5px;
+  height: 270px;
+  overflow: hidden;
+}
+
+.swal2-container h2,
+.swal2-container button,
+#swal2-html-container {
+  font-family: vazir !important;
+}
+
+.swal2-container h2 {
+  font-size: 22px;
+}
+
+#swal2-html-container {
+  color: red;
+  font-size: 14px;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}

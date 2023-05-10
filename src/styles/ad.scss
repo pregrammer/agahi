@@ -1,0 +1,61 @@
+main {
+  direction: rtl;
+  font-family: vazir;
+  padding: 70px 150px;
+
+  section {
+    margin-bottom: 50px;
+
+    span {
+      font-weight: bold;
+    }
+
+    p {
+      margin-right: 50px;
+      font-size: 14px;
+    }
+  }
+
+  .ad-map-container {
+    height: 350px;
+    margin-right: 50px;
+    margin-top: 25px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .change-ad-buttons {
+    margin-bottom: 70px;
+
+    button {
+      float: left;
+      font-family: vazir;
+      padding: 5px 20px;
+      border-radius: 7px;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      transition: all 0.2s;
+
+      &:last-child {
+        margin-left: 15px;
+        border: 1px solid green;
+        background-color: green;
+
+        &:hover {
+          color: green;
+          background-color: #fff;
+        }
+      }
+      &:first-child {
+        background-color: #e11919;
+        border: 1px solid #e11919;
+
+        &:hover {
+          color: #e11919;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

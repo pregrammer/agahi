@@ -1,0 +1,71 @@
+main {
+  background-color: #efefef;
+  min-height: 92vh;
+  padding-bottom: 50px;
+
+  .ad-container {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 30px;
+    direction: rtl;
+    padding: 50px;
+
+    .ad-card {
+      background-color: #fcfcfc;
+      border: 1px solid #b0b0b0;
+      width: 330px;
+      height: 180px;
+      border-radius: 7px;
+      transition: all 0.2s;
+      font-family: vazir;
+      display: flex;
+      align-items: center;
+
+      p {
+        padding: 0 20px;
+        font-size: 14px;
+        color: #343434;
+      }
+
+      &:hover {
+        box-shadow: 0 0 8px 3px rgb(176, 176, 176);
+      }
+    }
+  }
+
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(193, 193, 193);
+    background-color: #f8f3f3;
+    margin: 0 50px;
+    font-family: vazir;
+    font-size: 13px;
+
+    ul {
+      li {
+        display: inline-block;
+
+        a {
+          background-color: rgb(202, 202, 202);
+          padding: 7px 12px 7px 12px;
+          margin-right: 5px;
+          border-radius: 10px;
+          cursor: pointer;
+          user-select: none;
+        }
+      }
+
+      li.disabled a {
+        cursor: no-drop;
+      }
+
+      li.selected a {
+        color: #fff;
+        background-color: rgb(20, 13, 63);
+      }
+    }
+  }
+}
