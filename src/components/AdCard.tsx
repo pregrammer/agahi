@@ -1,13 +1,16 @@
-//
+import { Link } from "react-router-dom";
 
-const AdCard = () => {
+interface Prop {
+  address: string;
+  id: number;
+}
+const AdCard = ({ address, id }: Prop) => {
   return (
-    <article className="ad-card">
-      <p>
-        استان خراسان جنوبی - بیرجند - خیابان جمهوری - بعد از مدرسه ی شهاب -
-        آخرین منزل جنوبی - پلاک 856
-      </p>
-    </article>
+    <Link to={`advertisement/${id}`} style={{ textDecoration: "none" }}>
+      <article className="ad-card">
+        <p>{address}</p>
+      </article>
+    </Link>
   );
 };
 

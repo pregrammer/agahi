@@ -1,0 +1,63 @@
+main.auth {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 25vw;
+    height: 55vh;
+    direction: rtl;
+
+    .logo {
+      height: 150px;
+      img {
+        height: 100%;
+        margin-right: 25%;
+      }
+    }
+
+    .form-control {
+      display: flex;
+      flex-direction: column;
+      font-family: vazir;
+      padding: 0 20px;
+      margin-bottom: 25px;
+
+      input {
+        font-family: vazir;
+        padding: 5px;
+        margin-top: 10px;
+        border: 1px solid gray;
+        border-radius: 5px;
+      }
+    }
+
+    button[type="submit"] {
+      font-family: vazir;
+      padding: 7px 50px;
+      border: 1px solid green;
+      background-color: green;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-right: 33%;
+      margin-top: 15px;
+
+      &:hover {
+        background-color: #fff;
+        color: green;
+      }
+    }
+  }
+}
+
+main.auth .register-form {
+  height: 61vh;
+  .form-control {
+    margin-bottom: 10px;
+  }
+}

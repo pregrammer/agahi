@@ -1,5 +1,9 @@
 import { MouseEvent, FormEvent, useRef, useState } from "react";
 import Map from "./Map";
+import { useUser } from "./UserProvider";
+import Swal from "sweetalert2";
+import { useRefreshIndexPage } from "./RefreshIndexPageProvider";
+import { useRevalidator } from "react-router-dom";
 
 interface Prop {
   closeModal: () => void;
@@ -7,6 +11,7 @@ interface Prop {
 }
 
 interface Data {
+  id?: number;
   phoneNumber: string;
   address: string;
   coordinates: [lat: number, lng: number];
@@ -15,12 +20,17 @@ interface Data {
 
 const AdModal = ({ closeModal, data }: Prop) => {
   const modalRef = useRef(null);
+
   const [inputs, setInputs] = useState<Data>({
     phoneNumber: data ? data.phoneNumber : "",
     address: data ? data.address : "",
     coordinates: data ? data.coordinates : [35.7219, 51.3347],
     description: data ? data.description : "",
   });
+
+  const { userInfo } = useUser();
+  const { setRefresh } = useRefreshIndexPage();
+  let revalidator = useRevalidator();
 
   const onModalClick = (e: MouseEvent<HTMLElement>) => {
     if (e.target == modalRef.current) {
@@ -40,9 +50,38 @@ const AdModal = ({ closeModal, data }: Prop) => {
     setInputs((values) => ({ ...values, coordinates: [lat, lng] }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(inputs);
+    try {
+      const url = data
+        ? `http://localhost:3000/advertisements/${data.id}`
+        : "http://localhost:3000/advertisements";
+      const res = await fetch(url, {
+        method: data ? "PUT" : "POST",
+        body: JSON.stringify({
+          ...inputs,
+          userId: userInfo?.user.id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo?.accessToken}`,
+        },
+      });
+      if (res.ok) {
+        closeModal();
+        setRefresh((prev) => !prev);
+        Swal.fire(
+          `${data ? "!ویرایش شد" : "!ثبت شد"}`,
+          `آگهی مورد نظر با موفقیت ${data ? "ویرایش" : "ثبت"} شد`,
+          "success"
+        );
+        if (data) {
+          revalidator.revalidate();
+        }
+      }
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
   };
 
   return (

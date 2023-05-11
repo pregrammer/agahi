@@ -6,23 +6,35 @@ import { useState } from "react";
 import Portal from "../components/Portal";
 import AdModal from "../components/AdModal";
 import Map from "../components/Map";
+import {
+  useLoaderData,
+  LoaderFunctionArgs,
+  useParams,
+  useNavigate,
+} from "react-router-dom";
+import { useUser } from "../components/UserProvider";
+
+export const adLoader = async ({ params }: LoaderFunctionArgs) => {
+  const res = await fetch("http://localhost:3000/advertisements/" + params.id);
+  const data = await res.json();
+  return { data };
+};
 
 interface Data {
+  id: number;
   phoneNumber: string;
   address: string;
   coordinates: [lat: number, lng: number];
   description: string;
+  userId: number;
 }
 
 const Ad = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const data: Data = {
-    phoneNumber: "0915555555",
-    address: "تهراااااان",
-    coordinates: [35.7219, 51.3347],
-    description: "ندارددددد",
-  };
+  const { data } = useLoaderData() as { data: Data };
+  const { userInfo } = useUser();
+  const { id: paramId } = useParams();
+  const navigate = useNavigate();
 
   const handleModalClick = () => {
     setIsOpen((prev) => !prev);
@@ -38,22 +50,31 @@ const Ad = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "!بله",
       cancelButtonText: "خیر",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        const res = await fetch(
+          "http://localhost:3000/advertisements/" + paramId,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${userInfo?.accessToken}`,
+            },
+          }
+        );
+        if (res.ok) {
+          navigate("/");
+          Swal.fire("!حذف شد", ".آگهی مورد نظر با موفقیت حذف شد", "success");
+        }
       }
     });
   };
 
   return (
     <>
-      <main>
+      <main className="ad">
         <section>
           <span>آدرس:</span>
-          <p>
-            استان خراسان جنوبی - بیرجند - خیابان جمهوری - بعد از مدرسه ی شهاب -
-            آخرین منزل جنوبی - پلاک 856
-          </p>
+          <p>{data.address}</p>
         </section>
         <section>
           <span>مختصات دقیق:</span>
@@ -63,20 +84,22 @@ const Ad = () => {
         </section>
         <section>
           <span>شماره تماس:</span>
-          <p>09154862134</p>
+          <p>{data.phoneNumber}</p>
         </section>
         <section>
           <span>توضیحات:</span>
-          <p>ندارد</p>
+          <p>{data.description}</p>
         </section>
-        <section className="change-ad-buttons">
-          <button onClick={handleDelete}>
-            <FontAwesomeIcon icon={faTrash} /> حذف
-          </button>
-          <button onClick={handleModalClick}>
-            <FontAwesomeIcon icon={faEdit} /> ویرایش
-          </button>
-        </section>
+        {userInfo?.user.id === data.userId && (
+          <section className="change-ad-buttons">
+            <button onClick={handleDelete}>
+              <FontAwesomeIcon icon={faTrash} /> حذف
+            </button>
+            <button onClick={handleModalClick}>
+              <FontAwesomeIcon icon={faEdit} /> ویرایش
+            </button>
+          </section>
+        )}
       </main>
       {isOpen && (
         <Portal>
