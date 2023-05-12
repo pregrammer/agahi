@@ -9,7 +9,9 @@ import { useUser } from "./UserProvider";
 import Swal from "sweetalert2";
 
 const Header = () => {
+  // handle adModal
   const [isOpen, setIsOpen] = useState(false);
+
   const { userInfo, setUserInfo } = useUser();
   const navigate = useNavigate();
 

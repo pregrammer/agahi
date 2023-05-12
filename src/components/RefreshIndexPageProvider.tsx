@@ -1,3 +1,4 @@
+//when user submit a advertisement in adModal, index page should know about it and get refresh.
 import { createContext, useContext, useState, ReactNode } from "react";
 
 interface UserContextType {

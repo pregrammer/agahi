@@ -30,6 +30,7 @@ export default Map;
 
 function LocationMarker({ coordinates, handleCoordinates }: Prop) {
   useMapEvents({
+    // coordinates saved by clicking user on map
     click(e) {
       if (handleCoordinates) {
         handleCoordinates([e.latlng.lat, e.latlng.lng]);

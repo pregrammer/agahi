@@ -59,10 +59,18 @@ const Register = () => {
           "success"
         );
       } catch (error) {
-        if (error instanceof Error) alert(error.message);
+        if (error instanceof Error) console.log(error.message);
       } finally {
         setLoading(false);
       }
+    } else {
+      Swal.fire({
+        title: "!مشکلی به وجود آمده است",
+        text: "رمز عبور با تکرار آن همخوانی ندارد",
+        icon: "error",
+        confirmButtonText: "باشه",
+        confirmButtonColor: "#f00",
+      });
     }
   };
 

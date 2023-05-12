@@ -21,6 +21,7 @@ interface Data {
 const AdModal = ({ closeModal, data }: Prop) => {
   const modalRef = useRef(null);
 
+  // [35.7219, 51.3347] is tehran coordinates.
   const [inputs, setInputs] = useState<Data>({
     phoneNumber: data ? data.phoneNumber : "",
     address: data ? data.address : "",
@@ -30,9 +31,10 @@ const AdModal = ({ closeModal, data }: Prop) => {
 
   const { userInfo } = useUser();
   const { setRefresh } = useRefreshIndexPage();
-  let revalidator = useRevalidator();
+  const revalidator = useRevalidator();
 
   const onModalClick = (e: MouseEvent<HTMLElement>) => {
+    // if click on dark background not on modal content, close modal.
     if (e.target == modalRef.current) {
       closeModal();
     }
@@ -50,6 +52,7 @@ const AdModal = ({ closeModal, data }: Prop) => {
     setInputs((values) => ({ ...values, coordinates: [lat, lng] }));
   };
 
+  // if data provided, PUT request should be sent, else POST.
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -75,6 +78,8 @@ const AdModal = ({ closeModal, data }: Prop) => {
           `آگهی مورد نظر با موفقیت ${data ? "ویرایش" : "ثبت"} شد`,
           "success"
         );
+        // if we have data, it means we are in ad page and want to update data.
+        // so after updating, we need to revalidate loader to show the refreshed data.
         if (data) {
           revalidator.revalidate();
         }

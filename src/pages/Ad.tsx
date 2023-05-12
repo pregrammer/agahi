@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import { useUser } from "../components/UserProvider";
 
+// advertisement loader
 export const adLoader = async ({ params }: LoaderFunctionArgs) => {
   const res = await fetch("http://localhost:3000/advertisements/" + params.id);
   const data = await res.json();
@@ -30,6 +31,7 @@ interface Data {
 }
 
 const Ad = () => {
+  // handling adModal
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useLoaderData() as { data: Data };
   const { userInfo } = useUser();
@@ -51,20 +53,24 @@ const Ad = () => {
       confirmButtonText: "!بله",
       cancelButtonText: "خیر",
     }).then(async (result) => {
-      if (result.isConfirmed) {
-        const res = await fetch(
-          "http://localhost:3000/advertisements/" + paramId,
-          {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${userInfo?.accessToken}`,
-            },
+      try {
+        if (result.isConfirmed) {
+          const res = await fetch(
+            "http://localhost:3000/advertisements/" + paramId,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${userInfo?.accessToken}`,
+              },
+            }
+          );
+          if (res.ok) {
+            navigate("/");
+            Swal.fire("!حذف شد", ".آگهی مورد نظر با موفقیت حذف شد", "success");
           }
-        );
-        if (res.ok) {
-          navigate("/");
-          Swal.fire("!حذف شد", ".آگهی مورد نظر با موفقیت حذف شد", "success");
         }
+      } catch (error) {
+        if (error instanceof Error) console.log(error.message);
       }
     });
   };

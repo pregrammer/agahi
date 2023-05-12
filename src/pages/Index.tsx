@@ -14,9 +14,12 @@ interface Data {
 }
 
 const Index = () => {
+  // current page number
   const [pageNumber, setPageNumber] = useState(1);
   const [ads, setAds] = useState<Data[]>([]);
+  // for making pagination
   const [totalCount, setTotalCount] = useState(0);
+  // for refreshing index page data
   const { refresh } = useRefreshIndexPage();
 
   useEffect(() => {
@@ -32,7 +35,7 @@ const Index = () => {
           setTotalCount(tc ? Number(tc) : 0);
         }
       } catch (error) {
-        if (error instanceof Error) alert(error.message);
+        if (error instanceof Error) console.log(error.message);
       }
     };
     loadData();

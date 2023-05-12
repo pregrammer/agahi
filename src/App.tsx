@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Layout from "./components/Layout";
 import UserProvider from "./components/UserProvider";
 import RefreshIndexPageProvider from "./components/RefreshIndexPageProvider";
+import Error from "./pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -15,19 +16,23 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Index />,
+        errorElement: <Error />,
       },
       {
         path: "advertisement/:id",
         element: <Ad />,
-        loader: adLoader
+        loader: adLoader,
+        errorElement: <Error />,
       },
       {
         path: "login",
         element: <Login />,
+        errorElement: <Error />,
       },
       {
         path: "register",
         element: <Register />,
+        errorElement: <Error />,
       },
     ],
   },

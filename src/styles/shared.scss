@@ -44,7 +44,7 @@ header {
       border: none;
       border-radius: 15px;
       font-family: vazir;
-      padding: 5px 15px;
+      padding: 4px 15px;
       margin-right: 15px;
       background-color: #e33838;
       color: #fff;
@@ -71,8 +71,7 @@ header {
   }
 }
 
-// below is about ad modal
-
+// below is about ad modals
 .modal {
   position: fixed; /* Stay in place */
   z-index: 1000; /* Sit on top */
@@ -222,6 +221,7 @@ header {
 }
 
 ///////////          applying dark mode       /////////////
+
 body.dark-mode {
   background-color: $color-dark;
   color: $color-light;
@@ -233,6 +233,9 @@ body.dark-mode {
     }
   }
   main.auth {
+    form {
+      border-width: 2px;
+    }
     .logo {
       padding-top: 20px;
       padding-bottom: 30px;
@@ -249,7 +252,7 @@ body.dark-mode {
   main.index {
     background-color: $color-dark;
     .ad-card {
-      background-color: #d3d3d3;
+      background-color: #e2e2e2;
       border: none;
       &:hover {
         box-shadow: 0 0 8px 3px rgb(255, 255, 255);
@@ -270,6 +273,11 @@ body.dark-mode {
     input,
     textarea {
       background-color: rgb(209, 209, 209);
+    }
+  }
+  main.error {
+    .error-container {
+      background-color: #363742;
     }
   }
 }

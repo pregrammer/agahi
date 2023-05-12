@@ -1,0 +1,46 @@
+main.error {
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: vazir;
+
+  .error-container {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 6px red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 50px;
+
+    > p {
+      color: red;
+    }
+
+    .back-to-home {
+      margin-top: 20px;
+
+      > :first-child {
+        margin-right: 20px;
+        text-decoration: none;
+        color: rgb(0, 147, 147);
+      }
+
+      > button {
+        border: none;
+        border-radius: 5px;
+        font-family: vazir;
+        background-color: rgb(0, 147, 147);
+        color: #fff;
+        cursor: pointer;
+        padding: 3px 7px;
+      }
+
+      span {
+        margin-right: 5px;
+      }
+    }
+  }
+}
